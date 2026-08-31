@@ -1,0 +1,385 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.whaleal</groupId>
+    <artifactId>aihub-sdk</artifactId>
+
+    <version>1.0.0</version>
+
+    <packaging>pom</packaging>
+
+    <name>aihub</name>
+    <description>aihub 多厂商大模型 Java 客户端 SDK。 Multi-provider LLM client SDK for Java.</description>
+
+    <licenses>
+        <license>
+            <name>The Apache License, Version 2.0</name>
+            <url>https://www.apache.org/licenses/LICENSE-2.0.txt</url>
+        </license>
+    </licenses>
+
+    <issueManagement>
+        <system>GitHub</system>
+        <url>https://github.com/whaleal-dev/aihub/issues</url>
+    </issueManagement>
+
+    <url>https://github.com/whaleal-dev/aihub</url>
+
+    <organization>
+        <name>whaleal-dev</name>
+        <url>https://whaleal.com</url>
+    </organization>
+
+    <developers>
+        <developer>
+            <id>whaleal-dev</id>
+            <name>whaleal-dev</name>
+            <organization>whaleal</organization>
+            <organizationUrl>https://whaleal.com</organizationUrl>
+        </developer>
+        <developer>
+            <id>hengge</id>
+            <name>恒哥</name>
+        </developer>
+    </developers>
+
+    <scm>
+        <url>https://github.com/whaleal-dev/aihub</url>
+        <connection>scm:git:https://github.com/whaleal-dev/aihub.git</connection>
+        <developerConnection>scm:git:ssh://git@github.com/whaleal-dev/aihub.git</developerConnection>
+    </scm>
+
+    <properties>
+        <java.version>1.8</java.version>
+        <maven.compiler.source>${java.version}</maven.compiler.source>
+        <maven.compiler.target>${java.version}</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <flatten-maven-plugin.version>1.7.3</flatten-maven-plugin.version>
+        <gpg.executable>gpg</gpg.executable>
+        <root.publish.skip>true</root.publish.skip>
+        <live.provider.test.category>com.whaleal.aihub.test.LiveProviderTest</live.provider.test.category>
+        <test.groups></test.groups>
+        <test.excludedGroups>${live.provider.test.category}</test.excludedGroups>
+        <!-- jacoco prepare-agent 注入 argLine；默认空串避免 surefire 未定义报错 -->
+        <argLine></argLine>
+        <!-- spotbugs 基线：当前代码存量 bug 上限，新增 bug 会 fail，逐步降低此值 -->
+        <spotbugs.maxAllowedViolations>0</spotbugs.maxAllowedViolations>
+    </properties>
+
+    <!-- B9 依赖版本统一：消除 dependencyConvergence 冲突 -->
+    <dependencyManagement>
+        <dependencies>
+            <!-- slf4j-api 统一到 1.7.30（与 aihub 核心声明一致） -->
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-api</artifactId>
+                <version>1.7.30</version>
+            </dependency>
+            <!-- kotlin-stdlib 统一到 1.9.10（okhttp 4.12.0 传递 1.8.21 + 1.9.10，取高版本） -->
+            <dependency>
+                <groupId>org.jetbrains.kotlin</groupId>
+                <artifactId>kotlin-stdlib-jdk8</artifactId>
+                <version>1.9.10</version>
+            </dependency>
+            <!-- jackson-databind 统一到 2.16.0（与 aihub 核心声明一致；传递依赖可能引入旧版本） -->
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-databind</artifactId>
+                <version>2.16.0</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <modules>
+        <module>aihub</module>
+        <module>aihub-spring-boot-starter</module>
+        <module>aihub-bom</module>
+    </modules>
+
+    <build>
+        <defaultGoal>validate</defaultGoal>
+
+        <!-- P0-E: CI 质量门禁插件版本统一管理 -->
+        <pluginManagement>
+            <plugins>
+                <!-- E3: Java 8 字节码签名校验 -->
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>animal-sniffer-maven-plugin</artifactId>
+                    <version>1.23</version>
+                    <configuration>
+                        <signature>
+                            <groupId>org.codehaus.mojo.signature</groupId>
+                            <artifactId>java18</artifactId>
+                            <version>1.0</version>
+                        </signature>
+                        <!-- 仅检查本项目编译产物，不处理依赖 jar（避免 jline 等含 Java 22 字节码的依赖导致解析失败） -->
+                        <ignoreDependencies>true</ignoreDependencies>
+                    </configuration>
+                    <dependencies>
+                        <!-- 覆盖内置 ASM 版本以支持 Java 22+ 字节码（jline 3.30.0 含 Java 22 class） -->
+                        <dependency>
+                            <groupId>org.ow2.asm</groupId>
+                            <artifactId>asm</artifactId>
+                            <version>9.7</version>
+                        </dependency>
+                    </dependencies>
+                </plugin>
+                <!-- E4: 覆盖率门禁 -->
+                <plugin>
+                    <groupId>org.jacoco</groupId>
+                    <artifactId>jacoco-maven-plugin</artifactId>
+                    <version>0.8.12</version>
+                </plugin>
+                <!-- E5: 静态分析 -->
+                <plugin>
+                    <groupId>com.github.spotbugs</groupId>
+                    <artifactId>spotbugs-maven-plugin</artifactId>
+                    <version>4.8.6.4</version>
+                    <dependencies>
+                        <dependency>
+                            <groupId>com.github.spotbugs</groupId>
+                            <artifactId>spotbugs</artifactId>
+                            <version>4.8.6</version>
+                        </dependency>
+                    </dependencies>
+                    <configuration>
+                        <excludeFilterFile>${maven.multiModuleProjectDirectory}/spotbugs-exclude.xml</excludeFilterFile>
+                        <effort>Medium</effort>
+                        <threshold>Medium</threshold>
+                        <maxAllowedViolations>${spotbugs.maxAllowedViolations}</maxAllowedViolations>
+                    </configuration>
+                </plugin>
+                <!-- 1.0.0 为首个客户端版本，无 1.x API baseline，japicmp 跳过 -->
+                <plugin>
+                    <groupId>com.github.siom79.japicmp</groupId>
+                    <artifactId>japicmp-maven-plugin</artifactId>
+                    <version>0.21.2</version>
+                    <configuration>
+                        <skip>true</skip>
+                        <oldVersion>
+                            <dependency>
+                                <groupId>${project.groupId}</groupId>
+                                <artifactId>${project.artifactId}</artifactId>
+                                <version>1.0.0</version>
+                                <type>jar</type>
+                            </dependency>
+                        </oldVersion>
+                        <newVersion>
+                            <file>
+                                <path>${project.build.directory}/${project.build.finalName}.${project.packaging}</path>
+                            </file>
+                        </newVersion>
+                        <parameter>
+                            <breakBuildOnModifications>false</breakBuildOnModifications>
+                            <breakBuildOnBinaryIncompatibleModifications>false</breakBuildOnBinaryIncompatibleModifications>
+                            <ignoreMissingOldVersion>true</ignoreMissingOldVersion>
+                            <ignoreMissingNewVersion>true</ignoreMissingNewVersion>
+                        </parameter>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.11.0</version>
+                <configuration>
+                    <source>${maven.compiler.source}</source>
+                    <target>${maven.compiler.target}</target>
+                    <encoding>${project.build.sourceEncoding}</encoding>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.2.5</version>
+                <configuration>
+                    <argLine>${argLine}</argLine>
+                    <groups>${test.groups}</groups>
+                    <excludedGroups>${test.excludedGroups}</excludedGroups>
+                    <systemPropertyVariables>
+                        <!-- Tests run against MockWebServer / self-signed certs; allow trust-all
+                             during test only. Production must NOT set this. -->
+                        <aihub.ssl.trust-all>true</aihub.ssl.trust-all>
+                    </systemPropertyVariables>
+                    <!-- surefire 3.x 默认 fork JVM，CLI/TUI 测试可能阻塞 stdin；
+                         设超时防止 CI 挂死 -->
+                    <forkedProcessTimeoutInSeconds>180</forkedProcessTimeoutInSeconds> ([P0-E] E7 add forkedProcessTimeoutInSeconds to prevent CI hangs)
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-deploy-plugin</artifactId>
+                <version>3.1.1</version>
+                <inherited>false</inherited>
+                <configuration>
+                    <skip>${root.publish.skip}</skip>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-install-plugin</artifactId>
+                <version>3.1.1</version>
+                <inherited>false</inherited>
+                <configuration>
+                    <skip>${root.publish.skip}</skip>
+                </configuration>
+            </plugin>
+            <!-- B9 maven-enforcer：依赖收敛 + 禁止日志实现污染非 test scope -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-enforcer-plugin</artifactId>
+                <version>3.4.1</version>
+                <executions>
+                    <execution>
+                        <id>enforce-dependency-rules</id>
+                        <phase>validate</phase>
+                        <goals>
+                            <goal>enforce</goal>
+                        </goals>
+                        <configuration>
+                            <rules>
+                                <dependencyConvergence />
+                                <bannedDependencies>
+                                    <excludes>
+                                        <!-- 日志实现不得出现在非 test scope（避免污染下游日志栈） -->
+                                        <exclude>org.slf4j:slf4j-simple:*:*:!:test</exclude>
+                                        <exclude>org.slf4j:slf4j-log4j12:*:*:!:test</exclude>
+                                        <exclude>ch.qos.logback:logback-classic:*:*:!:test</exclude>
+                                    </excludes>
+                                </bannedDependencies>
+                            </rules>
+                            <fail>true</fail>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <!-- E3: animal-sniffer Java 8 字节码签名校验 -->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>animal-sniffer-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>check-java8-signature</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>check</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <!-- E4: jacoco 覆盖率门禁（初始阈值 30% line coverage） -->
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>prepare-agent</id>
+                        <goals>
+                            <goal>prepare-agent</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>report</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>report</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>check</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>check</goal>
+                        </goals>
+                        <configuration>
+                            <rules>
+                                <rule>
+                                    <element>BUNDLE</element>
+                                    <limits>
+                                        <limit>
+                                            <counter>LINE</counter>
+                                            <value>COVEREDRATIO</value>
+                                            <minimum>0.30</minimum>
+                                        </limit>
+                                    </limits>
+                                </rule>
+                            </rules>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <!-- E5: spotbugs 静态分析（effort Medium, threshold Medium, baseline 在 pluginManagement） -->
+            <plugin>
+                <groupId>com.github.spotbugs</groupId>
+                <artifactId>spotbugs-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>spotbugs-check</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>check</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+    <profiles>
+        <profile>
+            <id>live-provider-tests</id>
+            <properties>
+                <test.groups>${live.provider.test.category}</test.groups>
+                <test.excludedGroups></test.excludedGroups>
+            </properties>
+        </profile>
+        <profile>
+            <id>release</id>
+            <properties>
+                <root.publish.skip>false</root.publish.skip>
+            </properties>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-gpg-plugin</artifactId>
+                        <version>1.6</version>
+                        <configuration>
+                            <executable>${gpg.executable}</executable>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <id>sign-artifacts</id>
+                                <phase>verify</phase>
+                                <goals>
+                                    <goal>sign</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.sonatype.central</groupId>
+                        <artifactId>central-publishing-maven-plugin</artifactId>
+                        <version>0.11.0</version>
+                        <extensions>true</extensions>
+                        <configuration>
+                            <publishingServerId>central</publishingServerId>
+                            <excludeArtifacts>
+                                <excludeArtifact>aihub-sdk</excludeArtifact>
+                            </excludeArtifacts>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+</project>
+
+

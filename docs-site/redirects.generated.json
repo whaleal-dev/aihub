@@ -1,0 +1,1078 @@
+[
+  {
+    "from": "/docs/agent/a2a",
+    "to": "/docs/intro"
+  },
+  {
+    "from": "/docs/agent/agent-teams",
+    "to": "/docs/intro"
+  },
+  {
+    "from": "/docs/agent/agent-teams-api-reference",
+    "to": "/docs/intro"
+  },
+  {
+    "from": "/docs/agent/approval-permission-policy",
+    "to": "/docs/intro"
+  },
+  {
+    "from": "/docs/agent/codeact-custom-sandbox",
+    "to": "/docs/intro"
+  },
+  {
+    "from": "/docs/agent/codeact-runtime",
+    "to": "/docs/intro"
+  },
+  {
+    "from": "/docs/agent/coding-agent-acp-integration",
+    "to": "/docs/intro"
+  },
+  {
+    "from": "/docs/agent/coding-agent-cli",
+    "to": "/docs/intro"
+  },
+  {
+    "from": "/docs/agent/coding-agent-command-reference",
+    "to": "/docs/intro"
+  },
+  {
+    "from": "/docs/agent/context-window-management",
+    "to": "/docs/intro"
+  },
+  {
+    "from": "/docs/agent/cubesandbox-provider",
+    "to": "/docs/intro"
+  },
+  {
+    "from": "/docs/agent/custom-agent-development",
+    "to": "/docs/intro"
+  },
+  {
+    "from": "/docs/agent/memory-and-state",
+    "to": "/docs/intro"
+  },
+  {
+    "from": "/docs/agent/memory-compact-context",
+    "to": "/docs/intro"
+  },
+  {
+    "from": "/docs/agent/memory-management",
+    "to": "/docs/intro"
+  },
+  {
+    "from": "/docs/agent/minimal-react-agent",
+    "to": "/docs/intro"
+  },
+  {
+    "from": "/docs/agent/multi-provider-profiles",
+    "to": "/docs/intro"
+  },
+  {
+    "from": "/docs/agent/observability/trace",
+    "to": "/docs/intro"
+  },
+  {
+    "from": "/docs/agent/orchestration/stategraph",
+    "to": "/docs/intro"
+  },
+  {
+    "from": "/docs/agent/orchestration/subagent-handoff",
+    "to": "/docs/intro"
+  },
+  {
+    "from": "/docs/agent/orchestration/teams",
+    "to": "/docs/intro"
+  },
+  {
+    "from": "/docs/agent/orchestration/teams-api-reference",
+    "to": "/docs/intro"
+  },
+  {
+    "from": "/docs/agent/plugin-lifecycle-hooks",
+    "to": "/docs/intro"
+  },
+  {
+    "from": "/docs/agent/provider-config-examples",
+    "to": "/docs/intro"
+  },
+  {
+    "from": "/docs/agent/reference-core-classes",
+    "to": "/docs/reference/reference-core-classes"
+  },
+  {
+    "from": "/docs/agent/replay-recovery-audit",
+    "to": "/docs/intro"
+  },
+  {
+    "from": "/docs/agent/runtime-implementations",
+    "to": "/docs/intro"
+  },
+  {
+    "from": "/docs/agent/sandbox-spi",
+    "to": "/docs/intro"
+  },
+  {
+    "from": "/docs/agent/sdk-roadmap",
+    "to": "/docs/intro"
+  },
+  {
+    "from": "/docs/agent/skill",
+    "to": "/docs/intro"
+  },
+  {
+    "from": "/docs/agent/skills-overview",
+    "to": "/docs/intro"
+  },
+  {
+    "from": "/docs/agent/subagent-handoff-policy",
+    "to": "/docs/intro"
+  },
+  {
+    "from": "/docs/agent/tool-interceptor",
+    "to": "/docs/intro"
+  },
+  {
+    "from": "/docs/agent/trace-observability",
+    "to": "/docs/intro"
+  },
+  {
+    "from": "/docs/agent/weather-workflow-cookbook",
+    "to": "/docs/intro"
+  },
+  {
+    "from": "/docs/agent/workflow-stategraph",
+    "to": "/docs/intro"
+  },
+  {
+    "from": "/docs/ai-basics/architecture-and-package-map",
+    "to": "/docs/reference/maps/architecture-and-module-map"
+  },
+  {
+    "from": "/docs/ai-basics/chat/chat-memory",
+    "to": "/docs/intro"
+  },
+  {
+    "from": "/docs/ai-basics/chat/chat-memory-session-management",
+    "to": "/docs/intro"
+  },
+  {
+    "from": "/docs/ai-basics/chat/multimodal",
+    "to": "/docs/capabilities/models/multimodal"
+  },
+  {
+    "from": "/docs/ai-basics/chat/non-stream",
+    "to": "/docs/capabilities/models/chat"
+  },
+  {
+    "from": "/docs/ai-basics/chat/stream",
+    "to": "/docs/capabilities/models/streaming"
+  },
+  {
+    "from": "/docs/ai-basics/chat/tool-calling",
+    "to": "/docs/capabilities/tools/function-calling"
+  },
+  {
+    "from": "/docs/ai-basics/enhancements/overview",
+    "to": "/docs/intro"
+  },
+  {
+    "from": "/docs/ai-basics/enhancements/pinecone-rag-workflow",
+    "to": "/docs/intro"
+  },
+  {
+    "from": "/docs/ai-basics/enhancements/searxng-enhancement",
+    "to": "/docs/intro"
+  },
+  {
+    "from": "/docs/ai-basics/enhancements/spi-http-stack",
+    "to": "/docs/extending/code-level/spi-http-stack"
+  },
+  {
+    "from": "/docs/ai-basics/memory-and-tool-boundaries",
+    "to": "/docs/intro"
+  },
+  {
+    "from": "/docs/ai-basics/online-search/overview",
+    "to": "/docs/intro"
+  },
+  {
+    "from": "/docs/ai-basics/online-search/searxng",
+    "to": "/docs/intro"
+  },
+  {
+    "from": "/docs/ai-basics/overview",
+    "to": "/docs/capabilities/overview"
+  },
+  {
+    "from": "/docs/ai-basics/platform-adaptation",
+    "to": "/docs/capabilities/models/platform-service-matrix"
+  },
+  {
+    "from": "/docs/ai-basics/provider-and-model-extension",
+    "to": "/docs/extending/code-level/provider-extension"
+  },
+  {
+    "from": "/docs/ai-basics/rag/architecture-and-indexing",
+    "to": "/docs/intro"
+  },
+  {
+    "from": "/docs/ai-basics/rag/chunking-strategies",
+    "to": "/docs/intro"
+  },
+  {
+    "from": "/docs/ai-basics/rag/citations-trace-and-ui-integration",
+    "to": "/docs/intro"
+  },
+  {
+    "from": "/docs/ai-basics/rag/hybrid-retrieval-and-rerank-workflow",
+    "to": "/docs/intro"
+  },
+  {
+    "from": "/docs/ai-basics/rag/ingestion-pipeline",
+    "to": "/docs/intro"
+  },
+  {
+    "from": "/docs/ai-basics/rag/overview",
+    "to": "/docs/intro"
+  },
+  {
+    "from": "/docs/ai-basics/rag/pinecone-workflow",
+    "to": "/docs/intro"
+  },
+  {
+    "from": "/docs/ai-basics/rag/vector-store-and-storage-backends",
+    "to": "/docs/intro"
+  },
+  {
+    "from": "/docs/ai-basics/request-and-response-conventions",
+    "to": "/docs/capabilities/models/request-and-response-conventions"
+  },
+  {
+    "from": "/docs/ai-basics/responses/chat-vs-responses",
+    "to": "/docs/capabilities/models/chat-vs-responses"
+  },
+  {
+    "from": "/docs/ai-basics/responses/non-stream",
+    "to": "/docs/capabilities/models/responses"
+  },
+  {
+    "from": "/docs/ai-basics/responses/stream-events",
+    "to": "/docs/capabilities/models/streaming"
+  },
+  {
+    "from": "/docs/ai-basics/service-factory-and-registry",
+    "to": "/docs/capabilities/service-entry"
+  },
+  {
+    "from": "/docs/ai-basics/services/audio",
+    "to": "/docs/capabilities/media/audio"
+  },
+  {
+    "from": "/docs/ai-basics/services/embedding",
+    "to": "/docs/intro"
+  },
+  {
+    "from": "/docs/ai-basics/services/image-generation",
+    "to": "/docs/capabilities/media/image-generation"
+  },
+  {
+    "from": "/docs/ai-basics/services/realtime",
+    "to": "/docs/capabilities/media/realtime"
+  },
+  {
+    "from": "/docs/ai-basics/services/rerank",
+    "to": "/docs/intro"
+  },
+  {
+    "from": "/docs/ai-basics/skills",
+    "to": "/docs/intro"
+  },
+  {
+    "from": "/docs/ai-basics/unified-service-entry",
+    "to": "/docs/capabilities/service-entry"
+  },
+  {
+    "from": "/docs/capabilities/skills/discovery-and-loading",
+    "to": "/docs/intro"
+  },
+  {
+    "from": "/docs/capabilities/skills/loading-and-activation",
+    "to": "/docs/intro"
+  },
+  {
+    "from": "/docs/coding-agent/acp-integration",
+    "to": "/docs/intro"
+  },
+  {
+    "from": "/docs/coding-agent/architecture",
+    "to": "/docs/intro"
+  },
+  {
+    "from": "/docs/coding-agent/cli-and-tui",
+    "to": "/docs/intro"
+  },
+  {
+    "from": "/docs/coding-agent/command-reference",
+    "to": "/docs/intro"
+  },
+  {
+    "from": "/docs/coding-agent/compact-and-checkpoint",
+    "to": "/docs/intro"
+  },
+  {
+    "from": "/docs/coding-agent/configuration",
+    "to": "/docs/intro"
+  },
+  {
+    "from": "/docs/coding-agent/install-and-release",
+    "to": "/docs/intro"
+  },
+  {
+    "from": "/docs/coding-agent/lifecycle-hooks",
+    "to": "/docs/intro"
+  },
+  {
+    "from": "/docs/coding-agent/mcp-and-acp",
+    "to": "/docs/intro"
+  },
+  {
+    "from": "/docs/coding-agent/mcp-integration",
+    "to": "/docs/intro"
+  },
+  {
+    "from": "/docs/coding-agent/overview",
+    "to": "/docs/intro"
+  },
+  {
+    "from": "/docs/coding-agent/prompt-assembly",
+    "to": "/docs/intro"
+  },
+  {
+    "from": "/docs/coding-agent/provider-profiles",
+    "to": "/docs/intro"
+  },
+  {
+    "from": "/docs/coding-agent/quickstart",
+    "to": "/docs/intro"
+  },
+  {
+    "from": "/docs/coding-agent/release-and-installation",
+    "to": "/docs/intro"
+  },
+  {
+    "from": "/docs/coding-agent/runtime-architecture",
+    "to": "/docs/intro"
+  },
+  {
+    "from": "/docs/coding-agent/sandbox-routing",
+    "to": "/docs/intro"
+  },
+  {
+    "from": "/docs/coding-agent/session-runtime",
+    "to": "/docs/intro"
+  },
+  {
+    "from": "/docs/coding-agent/skill",
+    "to": "/docs/intro"
+  },
+  {
+    "from": "/docs/coding-agent/skills",
+    "to": "/docs/intro"
+  },
+  {
+    "from": "/docs/coding-agent/tools-and-approvals",
+    "to": "/docs/intro"
+  },
+  {
+    "from": "/docs/coding-agent/tui-customization",
+    "to": "/docs/intro"
+  },
+  {
+    "from": "/docs/coding-agent/why-coding-agent",
+    "to": "/docs/intro"
+  },
+  {
+    "from": "/docs/comparison/overview",
+    "to": "/docs/intro"
+  },
+  {
+    "from": "/docs/contributing",
+    "to": "/docs/reference/about/contributing"
+  },
+  {
+    "from": "/docs/core-sdk/architecture-and-module-map",
+    "to": "/docs/reference/maps/architecture-and-module-map"
+  },
+  {
+    "from": "/docs/core-sdk/audio",
+    "to": "/docs/capabilities/media/audio"
+  },
+  {
+    "from": "/docs/core-sdk/chat/chat-memory",
+    "to": "/docs/intro"
+  },
+  {
+    "from": "/docs/core-sdk/chat/chat-memory-session-management",
+    "to": "/docs/intro"
+  },
+  {
+    "from": "/docs/core-sdk/chat/multimodal",
+    "to": "/docs/capabilities/models/multimodal"
+  },
+  {
+    "from": "/docs/core-sdk/chat/non-stream",
+    "to": "/docs/capabilities/models/chat"
+  },
+  {
+    "from": "/docs/core-sdk/chat/stream",
+    "to": "/docs/capabilities/models/streaming"
+  },
+  {
+    "from": "/docs/core-sdk/chat/tool-calling",
+    "to": "/docs/capabilities/tools/function-calling"
+  },
+  {
+    "from": "/docs/core-sdk/embedding",
+    "to": "/docs/intro"
+  },
+  {
+    "from": "/docs/core-sdk/extension/ask-user-plugin",
+    "to": "/docs/intro"
+  },
+  {
+    "from": "/docs/core-sdk/extension/dynamic-workflow-plugin",
+    "to": "/docs/intro"
+  },
+  {
+    "from": "/docs/core-sdk/extension/extension-spi",
+    "to": "/docs/intro"
+  },
+  {
+    "from": "/docs/core-sdk/extension/lifecycle-extensions",
+    "to": "/docs/intro"
+  },
+  {
+    "from": "/docs/core-sdk/extension/model-extension",
+    "to": "/docs/extending/code-level/model-extension"
+  },
+  {
+    "from": "/docs/core-sdk/extension/overview",
+    "to": "/docs/intro"
+  },
+  {
+    "from": "/docs/core-sdk/extension/plugin-author-cookbook",
+    "to": "/docs/intro"
+  },
+  {
+    "from": "/docs/core-sdk/extension/plugin-packages",
+    "to": "/docs/intro"
+  },
+  {
+    "from": "/docs/core-sdk/extension/plugin-recipes",
+    "to": "/docs/intro"
+  },
+  {
+    "from": "/docs/core-sdk/extension/provider-extension",
+    "to": "/docs/extending/code-level/provider-extension"
+  },
+  {
+    "from": "/docs/core-sdk/extension/service-extension",
+    "to": "/docs/extending/code-level/service-extension"
+  },
+  {
+    "from": "/docs/core-sdk/extension/spi-http-stack",
+    "to": "/docs/extending/code-level/spi-http-stack"
+  },
+  {
+    "from": "/docs/core-sdk/image-generation",
+    "to": "/docs/capabilities/media/image-generation"
+  },
+  {
+    "from": "/docs/core-sdk/mcp/client-integration",
+    "to": "/docs/intro"
+  },
+  {
+    "from": "/docs/core-sdk/mcp/gateway-and-multi-service",
+    "to": "/docs/intro"
+  },
+  {
+    "from": "/docs/core-sdk/mcp/overview",
+    "to": "/docs/intro"
+  },
+  {
+    "from": "/docs/core-sdk/mcp/positioning-and-when-to-use",
+    "to": "/docs/intro"
+  },
+  {
+    "from": "/docs/core-sdk/mcp/protocol-capabilities",
+    "to": "/docs/intro"
+  },
+  {
+    "from": "/docs/core-sdk/mcp/publish-your-mcp-server",
+    "to": "/docs/intro"
+  },
+  {
+    "from": "/docs/core-sdk/mcp/streamable-http",
+    "to": "/docs/intro"
+  },
+  {
+    "from": "/docs/core-sdk/mcp/third-party-mcp-integration",
+    "to": "/docs/intro"
+  },
+  {
+    "from": "/docs/core-sdk/mcp/tool-exposure-semantics",
+    "to": "/docs/intro"
+  },
+  {
+    "from": "/docs/core-sdk/mcp/transport-types",
+    "to": "/docs/intro"
+  },
+  {
+    "from": "/docs/core-sdk/memory/chat-memory",
+    "to": "/docs/intro"
+  },
+  {
+    "from": "/docs/core-sdk/memory/memory-and-tool-boundaries",
+    "to": "/docs/intro"
+  },
+  {
+    "from": "/docs/core-sdk/memory/overview",
+    "to": "/docs/intro"
+  },
+  {
+    "from": "/docs/core-sdk/model-access/chat",
+    "to": "/docs/capabilities/models/chat"
+  },
+  {
+    "from": "/docs/core-sdk/model-access/chat-vs-responses",
+    "to": "/docs/capabilities/models/chat-vs-responses"
+  },
+  {
+    "from": "/docs/core-sdk/model-access/messages",
+    "to": "/docs/capabilities/models/messages"
+  },
+  {
+    "from": "/docs/core-sdk/model-access/multimodal",
+    "to": "/docs/capabilities/models/multimodal"
+  },
+  {
+    "from": "/docs/core-sdk/model-access/overview",
+    "to": "/docs/capabilities/models/overview"
+  },
+  {
+    "from": "/docs/core-sdk/model-access/request-and-response-conventions",
+    "to": "/docs/capabilities/models/request-and-response-conventions"
+  },
+  {
+    "from": "/docs/core-sdk/model-access/responses",
+    "to": "/docs/capabilities/models/responses"
+  },
+  {
+    "from": "/docs/core-sdk/model-access/streaming",
+    "to": "/docs/capabilities/models/streaming"
+  },
+  {
+    "from": "/docs/core-sdk/music-generation",
+    "to": "/docs/capabilities/media/music-generation"
+  },
+  {
+    "from": "/docs/core-sdk/overview",
+    "to": "/docs/capabilities/overview"
+  },
+  {
+    "from": "/docs/core-sdk/package-map",
+    "to": "/docs/reference/maps/package-map"
+  },
+  {
+    "from": "/docs/core-sdk/pinecone-rag-workflow",
+    "to": "/docs/intro"
+  },
+  {
+    "from": "/docs/core-sdk/platform-service-matrix",
+    "to": "/docs/capabilities/models/platform-service-matrix"
+  },
+  {
+    "from": "/docs/core-sdk/realtime",
+    "to": "/docs/capabilities/media/realtime"
+  },
+  {
+    "from": "/docs/core-sdk/responses/chat-vs-responses",
+    "to": "/docs/capabilities/models/chat-vs-responses"
+  },
+  {
+    "from": "/docs/core-sdk/responses/non-stream",
+    "to": "/docs/capabilities/models/responses"
+  },
+  {
+    "from": "/docs/core-sdk/responses/stream-events",
+    "to": "/docs/capabilities/models/streaming"
+  },
+  {
+    "from": "/docs/core-sdk/search-and-rag/chunking-strategies",
+    "to": "/docs/intro"
+  },
+  {
+    "from": "/docs/core-sdk/search-and-rag/citations-and-trace",
+    "to": "/docs/intro"
+  },
+  {
+    "from": "/docs/core-sdk/search-and-rag/embedding",
+    "to": "/docs/intro"
+  },
+  {
+    "from": "/docs/core-sdk/search-and-rag/evaluation",
+    "to": "/docs/intro"
+  },
+  {
+    "from": "/docs/core-sdk/search-and-rag/hybrid-retrieval",
+    "to": "/docs/intro"
+  },
+  {
+    "from": "/docs/core-sdk/search-and-rag/ingestion-pipeline",
+    "to": "/docs/intro"
+  },
+  {
+    "from": "/docs/core-sdk/search-and-rag/llm-as-judge",
+    "to": "/docs/intro"
+  },
+  {
+    "from": "/docs/core-sdk/search-and-rag/online-search",
+    "to": "/docs/intro"
+  },
+  {
+    "from": "/docs/core-sdk/search-and-rag/overview",
+    "to": "/docs/intro"
+  },
+  {
+    "from": "/docs/core-sdk/search-and-rag/query-planning",
+    "to": "/docs/intro"
+  },
+  {
+    "from": "/docs/core-sdk/search-and-rag/rerank",
+    "to": "/docs/intro"
+  },
+  {
+    "from": "/docs/core-sdk/search-and-rag/vector-store-and-backends",
+    "to": "/docs/intro"
+  },
+  {
+    "from": "/docs/core-sdk/searxng-enhancement",
+    "to": "/docs/intro"
+  },
+  {
+    "from": "/docs/core-sdk/service-entry-and-registry",
+    "to": "/docs/capabilities/service-entry"
+  },
+  {
+    "from": "/docs/core-sdk/skills",
+    "to": "/docs/intro"
+  },
+  {
+    "from": "/docs/core-sdk/skills/discovery-and-loading",
+    "to": "/docs/intro"
+  },
+  {
+    "from": "/docs/core-sdk/skills/loading-and-activation",
+    "to": "/docs/intro"
+  },
+  {
+    "from": "/docs/core-sdk/skills/overview",
+    "to": "/docs/intro"
+  },
+  {
+    "from": "/docs/core-sdk/skills/skill-vs-tool-vs-mcp",
+    "to": "/docs/intro"
+  },
+  {
+    "from": "/docs/core-sdk/spi-http-stack",
+    "to": "/docs/extending/code-level/spi-http-stack"
+  },
+  {
+    "from": "/docs/core-sdk/strengths-and-differentiators",
+    "to": "/docs/intro"
+  },
+  {
+    "from": "/docs/core-sdk/tools/annotation-based-tools",
+    "to": "/docs/capabilities/tools/annotation-based-tools"
+  },
+  {
+    "from": "/docs/core-sdk/tools/function-calling",
+    "to": "/docs/capabilities/tools/function-calling"
+  },
+  {
+    "from": "/docs/core-sdk/tools/overview",
+    "to": "/docs/capabilities/tools/overview"
+  },
+  {
+    "from": "/docs/core-sdk/tools/tool-execution-model",
+    "to": "/docs/intro"
+  },
+  {
+    "from": "/docs/core-sdk/tools/tool-whitelist-and-security",
+    "to": "/docs/intro"
+  },
+  {
+    "from": "/docs/core-sdk/video-generation",
+    "to": "/docs/capabilities/media/video-generation"
+  },
+  {
+    "from": "/docs/deploy/cloudflare-pages",
+    "to": "/docs/intro"
+  },
+  {
+    "from": "/docs/faq",
+    "to": "/docs/reference/faq"
+  },
+  {
+    "from": "/docs/flowgram/agent-tool-knowledge-integration",
+    "to": "/docs/intro"
+  },
+  {
+    "from": "/docs/flowgram/api-and-runtime",
+    "to": "/docs/intro"
+  },
+  {
+    "from": "/docs/flowgram/architecture",
+    "to": "/docs/intro"
+  },
+  {
+    "from": "/docs/flowgram/built-in-nodes",
+    "to": "/docs/intro"
+  },
+  {
+    "from": "/docs/flowgram/builtin-nodes",
+    "to": "/docs/intro"
+  },
+  {
+    "from": "/docs/flowgram/custom-node-extension",
+    "to": "/docs/intro"
+  },
+  {
+    "from": "/docs/flowgram/custom-nodes",
+    "to": "/docs/intro"
+  },
+  {
+    "from": "/docs/flowgram/frontend-backend-integration",
+    "to": "/docs/intro"
+  },
+  {
+    "from": "/docs/flowgram/frontend-custom-node-development",
+    "to": "/docs/intro"
+  },
+  {
+    "from": "/docs/flowgram/overview",
+    "to": "/docs/intro"
+  },
+  {
+    "from": "/docs/flowgram/quickstart",
+    "to": "/docs/intro"
+  },
+  {
+    "from": "/docs/flowgram/runtime",
+    "to": "/docs/intro"
+  },
+  {
+    "from": "/docs/flowgram/use-cases-and-paths",
+    "to": "/docs/intro"
+  },
+  {
+    "from": "/docs/flowgram/why-flowgram",
+    "to": "/docs/intro"
+  },
+  {
+    "from": "/docs/flowgram/workflow-execution-pipeline",
+    "to": "/docs/intro"
+  },
+  {
+    "from": "/docs/getting-started/chat-and-responses-guide",
+    "to": "/docs/capabilities/models/chat-vs-responses"
+  },
+  {
+    "from": "/docs/getting-started/coding-agent-cli-quickstart",
+    "to": "/docs/intro"
+  },
+  {
+    "from": "/docs/getting-started/installation",
+    "to": "/docs/getting-started/quickstart-java"
+  },
+  {
+    "from": "/docs/getting-started/modules-and-maven-central",
+    "to": "/docs/reference/maps/architecture-and-module-map"
+  },
+  {
+    "from": "/docs/getting-started/multimodal-and-function-call",
+    "to": "/docs/getting-started/first-tool-call"
+  },
+  {
+    "from": "/docs/getting-started/platforms-and-service-matrix",
+    "to": "/docs/capabilities/models/platform-service-matrix"
+  },
+  {
+    "from": "/docs/getting-started/quickstart-ollama",
+    "to": "/docs/getting-started/quickstart-java"
+  },
+  {
+    "from": "/docs/getting-started/quickstart-openai-jdk8",
+    "to": "/docs/getting-started/quickstart-java"
+  },
+  {
+    "from": "/docs/getting-started/quickstart-springboot",
+    "to": "/docs/getting-started/quickstart-spring-boot"
+  },
+  {
+    "from": "/docs/getting-started/spring-boot-autoconfiguration",
+    "to": "/docs/integrations/spring-boot/auto-configuration"
+  },
+  {
+    "from": "/docs/getting-started/troubleshooting",
+    "to": "/docs/production/troubleshooting"
+  },
+  {
+    "from": "/docs/getting-started/version-compatibility",
+    "to": "/docs/reference/version-compatibility"
+  },
+  {
+    "from": "/docs/glossary",
+    "to": "/docs/reference/glossary"
+  },
+  {
+    "from": "/docs/guides/blog-migration-map",
+    "to": "/docs/intro"
+  },
+  {
+    "from": "/docs/guides/deepseek-stream-search-rag",
+    "to": "/docs/intro"
+  },
+  {
+    "from": "/docs/guides/flowgram-mysql-taskstore",
+    "to": "/docs/intro"
+  },
+  {
+    "from": "/docs/guides/pinecone-vector-workflow",
+    "to": "/docs/intro"
+  },
+  {
+    "from": "/docs/guides/rag-ingestion-vector-store",
+    "to": "/docs/intro"
+  },
+  {
+    "from": "/docs/guides/rag-legal-assistant",
+    "to": "/docs/intro"
+  },
+  {
+    "from": "/docs/guides/searxng-web-search",
+    "to": "/docs/intro"
+  },
+  {
+    "from": "/docs/guides/spi-dispatcher-connectionpool",
+    "to": "/docs/intro"
+  },
+  {
+    "from": "/docs/guides/springboot-jdbc-agent-memory",
+    "to": "/docs/intro"
+  },
+  {
+    "from": "/docs/guides/springboot-mysql-chat-memory",
+    "to": "/docs/intro"
+  },
+  {
+    "from": "/docs/mcp/build-your-mcp-server",
+    "to": "/docs/intro"
+  },
+  {
+    "from": "/docs/mcp/client-integration",
+    "to": "/docs/intro"
+  },
+  {
+    "from": "/docs/mcp/configuration-and-gateway-reference",
+    "to": "/docs/intro"
+  },
+  {
+    "from": "/docs/mcp/gateway-management",
+    "to": "/docs/intro"
+  },
+  {
+    "from": "/docs/mcp/mcp-agent-end-to-end",
+    "to": "/docs/intro"
+  },
+  {
+    "from": "/docs/mcp/mysql-dynamic-datasource",
+    "to": "/docs/intro"
+  },
+  {
+    "from": "/docs/mcp/overview",
+    "to": "/docs/intro"
+  },
+  {
+    "from": "/docs/mcp/streamable-http",
+    "to": "/docs/intro"
+  },
+  {
+    "from": "/docs/mcp/streamable-http-transport",
+    "to": "/docs/intro"
+  },
+  {
+    "from": "/docs/mcp/third-party-mcp-integration",
+    "to": "/docs/intro"
+  },
+  {
+    "from": "/docs/mcp/tool-exposure-semantics",
+    "to": "/docs/intro"
+  },
+  {
+    "from": "/docs/mcp/transport-types",
+    "to": "/docs/intro"
+  },
+  {
+    "from": "/docs/mcp/use-cases-and-paths",
+    "to": "/docs/intro"
+  },
+  {
+    "from": "/docs/migration/overview",
+    "to": "/docs/intro"
+  },
+  {
+    "from": "/docs/operations/production-checklist",
+    "to": "/docs/production/production-checklist"
+  },
+  {
+    "from": "/docs/reference/release-checklist",
+    "to": "/docs/reference/maintainers/release-checklist"
+  },
+  {
+    "from": "/docs/security/overview",
+    "to": "/docs/production/security"
+  },
+  {
+    "from": "/docs/solutions/deepseek-stream-search-rag",
+    "to": "/docs/intro"
+  },
+  {
+    "from": "/docs/solutions/flowgram-mysql-taskstore",
+    "to": "/docs/intro"
+  },
+  {
+    "from": "/docs/solutions/legal-assistant",
+    "to": "/docs/intro"
+  },
+  {
+    "from": "/docs/solutions/overview",
+    "to": "/docs/intro"
+  },
+  {
+    "from": "/docs/solutions/pinecone-vector-workflow",
+    "to": "/docs/intro"
+  },
+  {
+    "from": "/docs/solutions/rag-ingestion-vector-store",
+    "to": "/docs/intro"
+  },
+  {
+    "from": "/docs/solutions/searxng-web-search",
+    "to": "/docs/intro"
+  },
+  {
+    "from": "/docs/solutions/spi-dispatcher-connectionpool",
+    "to": "/docs/intro"
+  },
+  {
+    "from": "/docs/solutions/springboot-jdbc-agent-memory",
+    "to": "/docs/intro"
+  },
+  {
+    "from": "/docs/solutions/springboot-mysql-chat-memory",
+    "to": "/docs/intro"
+  },
+  {
+    "from": "/docs/spring-boot/agentflow-integration",
+    "to": "/docs/intro"
+  },
+  {
+    "from": "/docs/spring-boot/auto-configuration",
+    "to": "/docs/integrations/spring-boot/auto-configuration"
+  },
+  {
+    "from": "/docs/spring-boot/bean-extension",
+    "to": "/docs/intro"
+  },
+  {
+    "from": "/docs/spring-boot/common-patterns",
+    "to": "/docs/intro"
+  },
+  {
+    "from": "/docs/spring-boot/configuration-reference",
+    "to": "/docs/integrations/spring-boot/configuration-reference"
+  },
+  {
+    "from": "/docs/spring-boot/overview",
+    "to": "/docs/integrations/spring-boot/overview"
+  },
+  {
+    "from": "/docs/spring-boot/quickstart",
+    "to": "/docs/integrations/spring-boot/quickstart"
+  },
+  {
+    "from": "/docs/start-here/agent-concepts",
+    "to": "/docs/intro"
+  },
+  {
+    "from": "/docs/start-here/architecture-at-a-glance",
+    "to": "/docs/reference/maps/architecture-at-a-glance"
+  },
+  {
+    "from": "/docs/start-here/choose-your-path",
+    "to": "/docs/getting-started/choose-your-path"
+  },
+  {
+    "from": "/docs/start-here/documentation-map",
+    "to": "/docs/intro"
+  },
+  {
+    "from": "/docs/start-here/extend-aihub",
+    "to": "/docs/intro"
+  },
+  {
+    "from": "/docs/start-here/feature-map",
+    "to": "/docs/getting-started/feature-map"
+  },
+  {
+    "from": "/docs/start-here/first-chat",
+    "to": "/docs/capabilities/models/chat"
+  },
+  {
+    "from": "/docs/start-here/first-tool-call",
+    "to": "/docs/getting-started/first-tool-call"
+  },
+  {
+    "from": "/docs/start-here/five-minute-first-chat",
+    "to": "/docs/getting-started/quickstart-java"
+  },
+  {
+    "from": "/docs/start-here/openai-compatible-and-trovebox",
+    "to": "/docs/capabilities/models/openai-compatible-and-trovebox"
+  },
+  {
+    "from": "/docs/start-here/programmatic-integration",
+    "to": "/docs/getting-started/programmatic-integration"
+  },
+  {
+    "from": "/docs/start-here/quickstart-java",
+    "to": "/docs/getting-started/quickstart-java"
+  },
+  {
+    "from": "/docs/start-here/quickstart-spring-boot",
+    "to": "/docs/getting-started/quickstart-spring-boot"
+  },
+  {
+    "from": "/docs/start-here/troubleshooting",
+    "to": "/docs/production/troubleshooting"
+  },
+  {
+    "from": "/docs/start-here/why-aihub",
+    "to": "/docs/getting-started/why-aihub"
+  },
+  {
+    "from": "/docs/troubleshooting/overview",
+    "to": "/docs/production/troubleshooting"
+  }
+]

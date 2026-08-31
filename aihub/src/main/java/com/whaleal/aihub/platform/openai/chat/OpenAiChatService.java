@@ -1,0 +1,239 @@
+package com.whaleal.aihub.platform.openai.chat;
+
+import com.whaleal.aihub.config.OpenAiConfig;
+import com.whaleal.aihub.convert.Jsons;
+import com.whaleal.aihub.constant.Constants;
+import com.whaleal.aihub.exception.HttpErrorDecoder;
+import com.whaleal.aihub.listener.SseListener;
+import com.whaleal.aihub.listener.StreamExecutionSupport;
+import com.whaleal.aihub.platform.openai.chat.entity.*;
+import com.whaleal.aihub.platform.openai.chat.entity.*;
+import com.whaleal.aihub.platform.openai.tool.Tool;
+import com.whaleal.aihub.platform.openai.tool.ToolCall;
+import com.whaleal.aihub.platform.openai.usage.Usage;
+import com.whaleal.aihub.service.Configuration;
+import com.whaleal.aihub.service.IChatService;
+import com.whaleal.aihub.tool.ToolUtil;
+import com.whaleal.aihub.network.UrlUtils;
+import lombok.extern.slf4j.Slf4j;
+import okhttp3.*;
+import okhttp3.sse.EventSource;
+
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * @Author cly
+ * @Description OpenAi 聊天服务
+ * @Date 2024/8/2 23:16
+ * @author 恒哥
+ */
+@Slf4j
+public class OpenAiChatService implements IChatService {
+    private static final MediaType JSON_MEDIA_TYPE = MediaType.get(Constants.APPLICATION_JSON);
+
+    private final OpenAiConfig openAiConfig;
+    private final OkHttpClient okHttpClient;
+    private final EventSource.Factory factory;
+
+    public OpenAiChatService(Configuration configuration) {
+        this.openAiConfig = configuration.getOpenAiConfig();
+        this.okHttpClient = configuration.getOkHttpClient();
+        this.factory = configuration.createRequestFactory();
+    }
+
+    public OpenAiChatService(Configuration configuration, OpenAiConfig openAiConfig) {
+        this.openAiConfig = openAiConfig;
+        this.okHttpClient = configuration.getOkHttpClient();
+        this.factory = configuration.createRequestFactory();
+    }
+
+    @Override
+    public ChatCompletionResponse chatCompletion(String baseUrl, String apiKey, ChatCompletion chatCompletion)  throws Exception {
+        try {
+            if(baseUrl == null || "".equals(baseUrl)) baseUrl = openAiConfig.getApiHost();
+            if(apiKey == null || "".equals(apiKey)) apiKey = openAiConfig.getApiKey();
+            boolean passThroughToolCalls = Boolean.TRUE.equals(chatCompletion.getPassThroughToolCalls());
+            chatCompletion.setStream(false);
+            chatCompletion.setStreamOptions(null);
+
+            if(chatCompletion.getFunctions()!=null && !chatCompletion.getFunctions().isEmpty()){
+                //List<Tool> tools = ToolUtil.getAllFunctionTools(chatCompletion.getFunctions());
+                List<Tool> tools = ToolUtil.getAllFunctionTools(chatCompletion.getFunctions());
+                chatCompletion.setTools(tools);
+                if(tools == null){
+                    chatCompletion.setParallelToolCalls(null);
+                }
+            }
+            if (chatCompletion.getTools()!=null && !chatCompletion.getTools().isEmpty()){
+
+            }else{
+                chatCompletion.setParallelToolCalls(null);
+            }
+
+
+            // 总token消耗
+            Usage allUsage = new Usage();
+            String finishReason = "first";
+
+            while("first".equals(finishReason) || "tool_calls".equals(finishReason)){
+
+                finishReason = null;
+
+                // 构造请求
+                String requestString = Jsons.toJson(chatCompletion);
+
+                Request request = new Request.Builder()
+                        .header("Authorization", "Bearer " + apiKey)
+                        .url(UrlUtils.concatUrl(baseUrl, openAiConfig.getChatCompletionUrl()))
+                        .post(jsonBody(requestString))
+                        .build();
+
+                Response execute = okHttpClient.newCall(request).execute();
+                if (execute.isSuccessful() && execute.body() != null){
+                    ChatCompletionResponse chatCompletionResponse = Jsons.fromJson(execute.body().string(), ChatCompletionResponse.class);
+
+                    Choice choice = chatCompletionResponse.getChoices().get(0);
+                    finishReason = choice.getFinishReason();
+
+                    Usage usage = chatCompletionResponse.getUsage();
+                    allUsage.merge(usage);
+
+                    // 判断是否为函数调用返回
+                    if("tool_calls".equals(finishReason)){
+                        if (passThroughToolCalls) {
+                            chatCompletionResponse.setUsage(allUsage);
+                            return chatCompletionResponse;
+                        }
+                        ChatMessage message = choice.getMessage();
+                        List<ToolCall> toolCalls = message.getToolCalls();
+
+                        List<ChatMessage> messages = new ArrayList<>(chatCompletion.getMessages());
+                        messages.add(message);
+
+                        // 添加 tool 消息
+                        for (ToolCall toolCall : toolCalls) {
+                            String functionName = toolCall.getFunction().getName();
+                            String arguments = toolCall.getFunction().getArguments();
+                            String functionResponse = ToolUtil.invoke(functionName, arguments);
+
+                            messages.add(ChatMessage.withTool(functionResponse, toolCall.getId()));
+                        }
+                        chatCompletion.setMessages(messages);
+
+                    }else{
+                        // 其他情况直接返回
+                        chatCompletionResponse.setUsage(allUsage);
+
+
+                        return chatCompletionResponse;
+
+                    }
+
+                }else{
+                    throw HttpErrorDecoder.decode(execute);
+                }
+
+            }
+
+
+            return null;
+        } finally {
+        }
+    }
+
+    @Override
+    public ChatCompletionResponse chatCompletion(ChatCompletion chatCompletion)  throws Exception {
+        return chatCompletion(null, null, chatCompletion);
+    }
+
+    @Override
+    public void chatCompletionStream(String baseUrl, String apiKey, ChatCompletion chatCompletion, SseListener eventSourceListener) throws Exception {
+        try {
+            if(baseUrl == null || "".equals(baseUrl)) baseUrl = openAiConfig.getApiHost();
+            if(apiKey == null || "".equals(apiKey)) apiKey = openAiConfig.getApiKey();
+            chatCompletion.setStream(true);
+            boolean passThroughToolCalls = Boolean.TRUE.equals(chatCompletion.getPassThroughToolCalls());
+            StreamOptions streamOptions = chatCompletion.getStreamOptions();
+            if(streamOptions == null){
+                chatCompletion.setStreamOptions(new StreamOptions(true));
+            }
+
+            if(chatCompletion.getFunctions()!=null && !chatCompletion.getFunctions().isEmpty()){
+                //List<Tool> tools = ToolUtil.getAllFunctionTools(chatCompletion.getFunctions());
+                List<Tool> tools = ToolUtil.getAllFunctionTools(chatCompletion.getFunctions());
+
+
+                chatCompletion.setTools(tools);
+                if(tools == null){
+                    chatCompletion.setParallelToolCalls(null);
+                }
+            }
+
+            if (chatCompletion.getTools()!=null && !chatCompletion.getTools().isEmpty()){
+
+            }else{
+                chatCompletion.setParallelToolCalls(null);
+            }
+
+            String finishReason = "first";
+
+            while("first".equals(finishReason) || "tool_calls".equals(finishReason)){
+
+                finishReason = null;
+                String jsonString = Jsons.toJson(chatCompletion);
+
+                Request request = new Request.Builder()
+                        .header("Authorization", "Bearer " + apiKey)
+                        .url(UrlUtils.concatUrl(baseUrl, openAiConfig.getChatCompletionUrl()))
+                        .post(jsonBody(jsonString))
+                        .build();
+                StreamExecutionSupport.execute(
+                        eventSourceListener,
+                        chatCompletion.getStreamExecution(),
+                        () -> factory.newEventSource(request, eventSourceListener)
+                );
+
+                finishReason = eventSourceListener.getFinishReason();
+                List<ToolCall> toolCalls = eventSourceListener.getToolCalls();
+
+                // 需要调用函数
+                if("tool_calls".equals(finishReason) && !toolCalls.isEmpty()){
+                    if (passThroughToolCalls) {
+                        return;
+                    }
+                    // 创建tool响应消息
+                    ChatMessage responseMessage = ChatMessage.withAssistant(eventSourceListener.getToolCalls());
+
+                    List<ChatMessage> messages = new ArrayList<>(chatCompletion.getMessages());
+                    messages.add(responseMessage);
+
+                    // 封装tool结果消息
+                    for (ToolCall toolCall : toolCalls) {
+                        String functionName = toolCall.getFunction().getName();
+                        String arguments = toolCall.getFunction().getArguments();
+                        String functionResponse = ToolUtil.invoke(functionName, arguments);
+
+                        messages.add(ChatMessage.withTool(functionResponse, toolCall.getId()));
+                    }
+                    eventSourceListener.setToolCalls(new ArrayList<>());
+                    eventSourceListener.setToolCall(null);
+                    chatCompletion.setMessages(messages);
+                }
+
+            }
+
+        } finally {
+        }
+    }
+
+    @Override
+    public void chatCompletionStream(ChatCompletion chatCompletion, SseListener eventSourceListener) throws Exception {
+        chatCompletionStream(null, null, chatCompletion, eventSourceListener);
+    }
+
+    private RequestBody jsonBody(String json) {
+        return RequestBody.create(json, JSON_MEDIA_TYPE);
+    }
+}
+

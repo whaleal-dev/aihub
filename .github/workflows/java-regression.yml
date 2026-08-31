@@ -1,0 +1,265 @@
+name: java-regression
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [dev, main]
+  pull_request:
+    branches: [dev, main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: java-regression-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  detect-java-changes:
+    name: detect-java-changes
+    runs-on: ubuntu-latest
+    outputs:
+      java: ${{ steps.changed.outputs.java }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Detect Java regression surface
+        id: changed
+        shell: bash
+        run: |
+          if [[ "${{ github.event_name }}" == "workflow_dispatch" ]]; then
+            echo "java=true" >> "$GITHUB_OUTPUT"
+            echo "Manual dispatch runs the full Java regression surface."
+            exit 0
+          fi
+
+          if [[ "${{ github.event_name }}" == "pull_request" ]]; then
+            BASE="${{ github.event.pull_request.base.sha }}"
+            HEAD="${{ github.event.pull_request.head.sha }}"
+          else
+            BASE="${{ github.event.before }}"
+            HEAD="${{ github.sha }}"
+            if [[ "$BASE" =~ ^0+$ ]]; then
+              BASE="$(git rev-list --max-parents=0 "$HEAD")"
+            fi
+          fi
+
+          echo "Changed files between $BASE and $HEAD:"
+          CHANGED_FILES="$(git diff --name-only "$BASE" "$HEAD")"
+          printf '%s\n' "$CHANGED_FILES"
+
+          if printf '%s\n' "$CHANGED_FILES" | grep -Eq '^(pom\.xml|aihub/|aihub-spring-boot-starter/|aihub-bom/|\.github/workflows/java-regression\.yml$)'; then
+            echo "java=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "java=false" >> "$GITHUB_OUTPUT"
+          fi
+
+  package-smoke:
+    name: package-smoke
+    runs-on: ubuntu-latest
+    needs: detect-java-changes
+    if: needs.detect-java-changes.outputs.java == 'true'
+    timeout-minutes: 30
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '8'
+          cache: maven
+
+      - name: Monorepo package smoke
+        run: mvn -B -ntp -DskipTests package
+
+  # E3-E7: Quality gates run once on JDK 8 (animal-sniffer + jacoco + spotbugs + japicmp + surefire 3.x)
+  quality-gates:
+    name: quality-gates
+    runs-on: ubuntu-latest
+    needs: detect-java-changes
+    if: needs.detect-java-changes.outputs.java == 'true'
+    timeout-minutes: 45
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '8'
+          cache: maven
+
+      - name: Run quality gates (animal-sniffer + jacoco + spotbugs + japicmp)
+        run: mvn -B -ntp verify
+
+      - name: Upload JaCoCo reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: jacoco-reports
+          path: |
+            **/target/site/jacoco/**
+            **/target/japicmp/**
+          if-no-files-found: ignore
+
+  # E1: JDK x OS matrix for cross-JDK test verification
+  module-tests:
+    name: module-tests (${{ matrix.module }} / JDK ${{ matrix.jdk }} / ${{ matrix.os }})
+    runs-on: ${{ matrix.os }}
+    needs: detect-java-changes
+    if: needs.detect-java-changes.outputs.java == 'true'
+    timeout-minutes: 30
+    strategy:
+      fail-fast: false
+      matrix:
+        module:
+          - aihub
+          - aihub-spring-boot-starter
+        jdk: ['8', '17', '21']
+        os: [ubuntu-latest, windows-latest]
+        exclude:
+          - module: aihub-spring-boot-starter
+            jdk: '21'
+          - module: aihub-spring-boot-starter
+            os: windows-latest
+
+    # JDK 17/21 are best-effort: P0 baseline is JDK 8 (the supported Java 8 promise).
+    # Cross-JDK failures (process state STOPPED vs EXITED, Nashorn API drift, etc.) are
+    # pre-existing issues surfaced by the new matrix. Marked continue-on-error until P1
+    # JDK 17/21 hardening sprint lands.
+    continue-on-error: ${{ matrix.jdk != '8' }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: ${{ matrix.jdk }}
+          cache: maven
+
+      - name: Run module test gate
+        run: mvn -B -ntp -pl ${{ matrix.module }} -am -DskipTests=false test
+
+      - name: Upload surefire reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: surefire-${{ matrix.module }}-jdk${{ matrix.jdk }}-${{ matrix.os }}
+          path: |
+            **/target/surefire-reports/**
+          if-no-files-found: ignore
+
+  # E2: Dependency size assertion for aihub core runtime classpath
+  check-size:
+    name: check-size
+    runs-on: ubuntu-latest
+    needs: detect-java-changes
+    if: needs.detect-java-changes.outputs.java == 'true'
+    timeout-minutes: 15
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '8'
+          cache: maven
+
+      - name: Assert aihub runtime dependency size
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          # Copy runtime-scope dependencies to measure total size
+          mvn -B -ntp -pl aihub dependency:copy-dependencies \
+            -DincludeScope=runtime \
+            -DoutputDirectory=target/runtime-deps
+
+          DEPS_DIR="aihub/target/runtime-deps"
+          TOTAL_BYTES=$(find "$DEPS_DIR" -name '*.jar' -printf '%s\n' | awk '{s+=$1} END {print s}')
+          TOTAL_MB=$(awk "BEGIN {printf \"%.2f\", $TOTAL_BYTES / 1048576}")
+
+          echo "aihub runtime dependencies: ${TOTAL_MB} MB ($TOTAL_BYTES bytes)"
+
+          # Print top 10 largest jars
+          echo ""
+          echo "Top 10 largest dependencies:"
+          find "$DEPS_DIR" -name '*.jar' -printf '%s %f\n' \
+            | sort -rn | head -10 | while read -r size name; do
+              mb=$(awk "BEGIN {printf \"%.2f\", $size / 1048576}")
+              echo "  ${mb} MB  $name"
+            done
+
+          # Assert under limit (25 MB baseline; goal is 15 MB, see task plan E2)
+          LIMIT_BYTES=$((25 * 1048576))
+          if [[ "$TOTAL_BYTES" -gt "$LIMIT_BYTES" ]]; then
+            echo ""
+            echo "FAIL: aihub runtime dependencies ${TOTAL_MB} MB exceeds 25 MB limit"
+            exit 1
+          fi
+          echo ""
+          echo "PASS: aihub runtime dependencies ${TOTAL_MB} MB within 25 MB limit"
+
+  java-regression:
+    name: java-regression
+    runs-on: ubuntu-latest
+    needs:
+      - detect-java-changes
+      - package-smoke
+      - quality-gates
+      - module-tests
+      - check-size
+    if: always()
+    steps:
+      - name: Assert Java regression gate
+        shell: bash
+        run: |
+          echo "java changes: ${{ needs.detect-java-changes.outputs.java }}"
+          echo "detect-java-changes: ${{ needs.detect-java-changes.result }}"
+          echo "package-smoke: ${{ needs.package-smoke.result }}"
+          echo "quality-gates: ${{ needs.quality-gates.result }}"
+          echo "module-tests: ${{ needs.module-tests.result }}"
+          echo "check-size: ${{ needs.check-size.result }}"
+
+          if [[ "${{ needs.detect-java-changes.result }}" != "success" ]]; then
+            echo "detect-java-changes did not pass."
+            exit 1
+          fi
+
+          if [[ "${{ needs.detect-java-changes.outputs.java }}" != "true" ]]; then
+            echo "No Java regression surface changed; required gate passes without running the matrix."
+            exit 0
+          fi
+
+          if [[ "${{ needs.package-smoke.result }}" != "success" ]]; then
+            echo "package-smoke did not pass."
+            exit 1
+          fi
+
+          if [[ "${{ needs.quality-gates.result }}" != "success" ]]; then
+            echo "quality-gates did not pass."
+            exit 1
+          fi
+
+          if [[ "${{ needs.module-tests.result }}" != "success" ]]; then
+            echo "module-tests did not pass."
+            exit 1
+          fi
+
+          if [[ "${{ needs.check-size.result }}" != "success" ]]; then
+            echo "check-size did not pass."
+            exit 1
+          fi

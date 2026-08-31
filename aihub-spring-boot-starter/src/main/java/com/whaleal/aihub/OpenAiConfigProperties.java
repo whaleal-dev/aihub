@@ -1,0 +1,30 @@
+package com.whaleal.aihub;
+
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.springframework.boot.context.properties.ConfigurationProperties;
+
+/**
+ * @Author cly
+ * @Description OpenAI閰嶇疆鏂囦欢
+ * @Date 2024/8/9 23:17
+ */
+
+@Data
+@NoArgsConstructor
+@ConfigurationProperties(prefix = "aihub.openai")
+public class OpenAiConfigProperties {
+    private String apiHost = "https://api.openai.com/";
+    //private String wsHost = "wss://api.openai.com/";
+    private String apiKey = "";
+    private String chatCompletionUrl = "v1/chat/completions";
+    private String embeddingUrl = "v1/embeddings";
+    private String speechUrl = "v1/audio/speech";
+    private String transcriptionUrl = "v1/audio/transcriptions";
+    private String translationUrl = "v1/audio/translations";
+    private String realtimeUrl = "v1/realtime";
+    private String imageGenerationUrl = "v1/images/generations";
+    private String responsesUrl = "v1/responses";
+    private String videoUrl = "v1/videos";
+}
+

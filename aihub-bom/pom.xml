@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.whaleal</groupId>
+        <artifactId>aihub-sdk</artifactId>
+        <version>1.0.0</version>
+    </parent>
+
+    <artifactId>aihub-bom</artifactId>
+    <packaging>pom</packaging>
+
+    <name>aihub-bom</name>
+    <description>aihub 多模块版本对齐 BOM。 Bill of materials for aligning aihub module versions.</description>
+
+    <licenses>
+        <license>
+            <name>The Apache License, Version 2.0</name>
+            <url>https://www.apache.org/licenses/LICENSE-2.0.txt</url>
+        </license>
+    </licenses>
+
+    <issueManagement>
+        <system>GitHub</system>
+        <url>https://github.com/whaleal-dev/aihub/issues</url>
+    </issueManagement>
+    <url>https://github.com/whaleal-dev/aihub</url>
+
+    <organization>
+        <name>whaleal-dev</name>
+        <url>https://whaleal.com</url>
+    </organization>
+
+    <developers>
+        <developer>
+            <id>whaleal-dev</id>
+            <name>whaleal-dev</name>
+            <organization>whaleal</organization>
+            <organizationUrl>https://whaleal.com</organizationUrl>
+        </developer>
+        <developer>
+            <id>hengge</id>
+            <name>恒哥</name>
+        </developer>
+    </developers>
+
+    <scm>
+        <url>https://github.com/whaleal-dev/aihub</url>
+        <connection>scm:git:https://github.com/whaleal-dev/aihub.git</connection>
+        <developerConnection>scm:git:ssh://git@github.com/whaleal-dev/aihub.git</developerConnection>
+    </scm>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>com.whaleal</groupId>
+                <artifactId>aihub</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.whaleal</groupId>
+                <artifactId>aihub-spring-boot-starter</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <profiles>
+        <profile>
+            <id>release</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>flatten-maven-plugin</artifactId>
+                        <version>${flatten-maven-plugin.version}</version>
+                        <configuration>
+                            <flattenMode>bom</flattenMode>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <id>flatten</id>
+                                <phase>process-resources</phase>
+                                <goals>
+                                    <goal>flatten</goal>
+                                </goals>
+                            </execution>
+                            <execution>
+                                <id>flatten-clean</id>
+                                <phase>clean</phase>
+                                <goals>
+                                    <goal>clean</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-gpg-plugin</artifactId>
+                        <version>1.6</version>
+                        <configuration>
+                            <executable>${gpg.executable}</executable>
+                            
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <id>sign-artifacts</id>
+                                <phase>verify</phase>
+                                <goals>
+                                    <goal>sign</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.sonatype.central</groupId>
+                        <artifactId>central-publishing-maven-plugin</artifactId>
+                        <version>0.11.0</version>
+                        <extensions>true</extensions>
+                        <configuration>
+                            <publishingServerId>central</publishingServerId>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+</project>
+
+
