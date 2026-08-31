@@ -7,7 +7,7 @@
 - **What it is not**: RAG, MCP, Agent runtime, workflow engine, Coding CLI, or plugin host.
 - **Primary language**: Java 8
 - **Build tool**: Maven
-- **Public docs**: `docs-site/` deployed to GitHub Pages at https://whaleal-dev.github.io/aihub/
+- **Public docs**: `docs-site/` deployed to GitHub Pages at https://whaleal.com/aihub/
 
 ## Modules
 

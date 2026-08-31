@@ -1,7 +1,7 @@
 ---
 sidebar_position: 1
 title: GitHub Pages 部署
-description: aihub 文档站发布在 GitHub Pages 默认地址 whaleal-dev.github.io/aihub。
+description: aihub 文档站发布在 whaleal.com/aihub，由 Actions 构建 docs-site。
 tags: [how-to]
 ---
 
@@ -9,20 +9,28 @@ tags: [how-to]
 
 公开文档地址：
 
-**https://whaleal-dev.github.io/aihub/**
+**https://whaleal.com/aihub/**
 
-推送到 `main` 且改动了 `docs-site/` 时，`.github/workflows/docs-pages.yml` 会构建并发布。
+不要用 GitHub 的 `jekyll-gh-pages.yml`。那个模板从仓库根目录跑 Jekyll，首页会变成 `README.md`。
+
+发布工作流是 [`.github/workflows/docs-pages.yml`](https://github.com/whaleal-dev/aihub/blob/main/.github/workflows/docs-pages.yml)：推送到 `main` 就会构建 `docs-site/` 并部署。Actions 里名叫 **Deploy GitHub Pages**。截图里的 `java-regression` 是 Java CI，和文档站无关。
+
+## 仓库设置
+
+Settings → Pages：
+
+1. **Source** 选 **GitHub Actions**
+2. 不要选 Deploy from a branch，也不要选 Jekyll / Static HTML
+3. 自定义域名保持 `whaleal.com`
 
 ## 站点配置
 
 | 项 | 值 |
-|----|----|
-| `url` | `https://whaleal-dev.github.io` |
+|----|------|
+| `url` | `https://whaleal.com` |
 | `baseUrl` | `/aihub/` |
 | 构建目录 | `docs-site/build` |
 | 工作流 | `.github/workflows/docs-pages.yml` |
-
-不要改成自定义域名，除非维护者明确切换。
 
 ## 本地验证（与线上同一条命令）
 
@@ -38,6 +46,6 @@ Docusaurus 开启了 `onBrokenLinks: throw`。链到已删除的 Agent / RAG / M
 
 ## 发布后核对
 
-1. https://whaleal-dev.github.io/aihub/ 能打开
-2. https://whaleal-dev.github.io/aihub/docs/intro 能打开
+1. https://whaleal.com/aihub/ 能打开，且是带导航的文档站（不是 README）
+2. https://whaleal.com/aihub/docs/intro 能打开
 3. 首页不再出现 Agent / MCP / Coding Agent 入口

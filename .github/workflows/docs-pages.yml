@@ -1,11 +1,11 @@
-name: docs-pages
+# GitHub Pages 发布：结构与官方 starter 相同（permissions / concurrency / deploy-pages），
+# 但构建的是 docs-site 的 Docusaurus，不是仓库根目录 Jekyll。
+# 不要再添加 jekyll-gh-pages.yml：它会把 README.md 当成站点首页。
+name: Deploy GitHub Pages
 
 on:
   push:
-    branches: [main]
-    paths:
-      - 'docs-site/**'
-      - '.github/workflows/docs-pages.yml'
+    branches: ["main"]
   workflow_dispatch:
 
 permissions:
@@ -14,8 +14,8 @@ permissions:
   id-token: write
 
 concurrency:
-  group: docs-pages
-  cancel-in-progress: true
+  group: pages
+  cancel-in-progress: false
 
 jobs:
   build:
@@ -31,7 +31,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '20'
-          cache: 'npm'
+          cache: npm
           cache-dependency-path: docs-site/package-lock.json
 
       - name: Configure Pages
@@ -46,6 +46,8 @@ jobs:
       - name: Build docs
         env:
           GITHUB_PAGES: 'true'
+          DOCS_SITE_URL: https://whaleal.com
+          DOCS_SITE_BASE_URL: /aihub/
         run: npm run build
 
       - name: Upload artifact
@@ -54,12 +56,12 @@ jobs:
           path: docs-site/build
 
   deploy:
-    runs-on: ubuntu-latest
-    needs: build
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v5
