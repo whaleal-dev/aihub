@@ -29,6 +29,7 @@ Parent POM artifact is `aihub-sdk` (`packaging=pom`). Do not reintroduce deleted
 5. Do not add planning / walkthrough files under repo root or `docs/09-PLANNING/` / `docs/10-WALKTHROUGH/`.
 6. Public docs on GitHub Pages must match the client-only scope. Do not document RAG / MCP / Agent / FlowGram as if they shipped here.
 7. `@author` on existing Java files is not rewritten; new files use `@author 恒哥`, edits append `@author 恒哥`.
+8. Git author/committer is only `hbn.king <hbn.king@gmail.com>`. Never add `cursoragent` / `Cursor` as `@author`, POM developer, or `Co-authored-by` trailer. If a commit still contains `Co-authored-by: Cursor <cursoragent@cursor.com>`, strip it before push.
 
 ## Build And Test
 

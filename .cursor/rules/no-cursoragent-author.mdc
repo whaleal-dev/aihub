@@ -1,0 +1,16 @@
+---
+description: 禁止把 cursoragent / Cursor 写成仓库作者或 Git 共同作者
+alwaysApply: true
+---
+
+# 禁止 cursoragent 作者
+
+Git 作者 / 提交者只用 `hbn.king <hbn.king@gmail.com>`。Javadoc 用 `@author 恒哥`。
+
+禁止出现：
+
+- `Co-authored-by: Cursor <cursoragent@cursor.com>`
+- `@author Cursor` / `@author cursoragent`
+- POM `<developers>` 里的 Cursor / cursoragent
+
+`git commit` 之后必须检查 `git log -1 --format=%B`。若仍有 Cursor trailer，先从 message 去掉再推送。
