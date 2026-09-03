@@ -10,7 +10,7 @@ tags: [reference]
 | 项 | 当前边界 |
 | --- | --- |
 | 稳定版 | `1.0.0` |
-| Maven groupId | `com.whaleal` |
+| Maven groupId | `io.github.whaleal-dev` |
 | Java | 8 source / target |
 | 文档站 | Node.js `>=20`，发布到 https://whaleal-dev.github.io/aihub/ |
 

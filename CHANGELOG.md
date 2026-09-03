@@ -12,9 +12,10 @@ Public docs: [GitHub Pages](https://whaleal-dev.github.io/aihub/).
 First release of **whaleal aihub** as a JDK 8+ Java LLM client.
 
 ### Added
-- Core client (`com.whaleal:aihub`): Chat / Completions (sync + SSE), Responses / Messages, Embedding, image / audio / video / music / Realtime, Rerank, multi-provider adapters, `tools` / `tool_calls` protocol fields.
-- Spring Boot starter (`com.whaleal:aihub-spring-boot-starter`).
-- BOM (`com.whaleal:aihub-bom`).
+- Core client (`io.github.whaleal-dev:aihub`): Chat / Completions (sync + SSE), Responses / Messages, Embedding, image / audio / video / music / Realtime, Rerank, multi-provider adapters, `tools` / `tool_calls` protocol fields.
+- Spring Boot starter (`io.github.whaleal-dev:aihub-spring-boot-starter`).
+- BOM (`io.github.whaleal-dev:aihub-bom`).
+- Maven Central：`io.github.whaleal-dev` 坐标；推送 `release-*` 走 `-Pcentral` 自动发布（对齐 quick-sms）。
 
 ### Out of scope
 - RAG, MCP, Agent runtime, workflow engines, Coding CLI, plugin host — not shipped in this tree.

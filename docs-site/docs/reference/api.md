@@ -11,7 +11,7 @@ tags: [reference]
 
 | 模块 | Maven artifact | Javadoc |
 | --- | --- | --- |
-| 核心客户端 | `aihub` | [aihub 1.0.0](https://javadoc.io/doc/com.whaleal/aihub/1.0.0/index.html) |
-| Spring Boot starter | `aihub-spring-boot-starter` | [starter 1.0.0](https://javadoc.io/doc/com.whaleal/aihub-spring-boot-starter/1.0.0/index.html) |
+| 核心客户端 | `aihub` | [aihub 1.0.0](https://javadoc.io/doc/io.github.whaleal-dev/aihub/1.0.0/index.html) |
+| Spring Boot starter | `aihub-spring-boot-starter` | [starter 1.0.0](https://javadoc.io/doc/io.github.whaleal-dev/aihub-spring-boot-starter/1.0.0/index.html) |
 
 升级前看 [版本兼容性](/docs/reference/version-compatibility)。

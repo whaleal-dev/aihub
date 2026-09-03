@@ -24,31 +24,33 @@ AIHub 当前采用 **全模块同号发布**：
 2. 把所有 Maven POM 从 `*-SNAPSHOT` 改成同一个 release 版本。
 3. 同步 README、README-EN 和 docs-site 里的用户安装版本。
 4. 确认 `aihub-bom` 覆盖需要对齐的发布模块。
-5. 确认 release profile 不发布聚合根项目、demo artifact 或 CLI fat jar。
-6. 确认 Maven `settings.xml` 里存在 Central server id，且密钥不进仓库。
-7. 确认 GPG agent / Kleopatra 可以完成签名。
+5. 确认 `central` profile 不发布聚合根 `aihub-sdk`。
+6. 确认仓库 Actions Secrets 已配置 `MAVEN_CENTRAL_USERNAME` / `MAVEN_CENTRAL_PASSWORD` / `MAVEN_GPG_PRIVATE_KEY` / `MAVEN_GPG_PASSPHRASE`（与 quick-sms 相同）。
+7. 确认 GPG 私钥可签名（CI 使用 `--pinentry-mode loopback`）。
 
 ## 本地验证
 
-```powershell
+```bash
 mvn -DskipTests package
-mvn -P release -DskipTests clean verify
+mvn -Pcentral -DskipTests clean verify
 ```
 
 如果修改 docs-site：
 
-```powershell
+```bash
 npm --prefix docs-site ci
 npm --prefix docs-site run build
 ```
 
 ## 发布
 
-```powershell
-mvn -P release -DskipTests clean deploy
-```
+推送 `release-x.y.z`（例如 `release-1.0.0`）会跑 [publish-maven-central.yml](https://github.com/whaleal-dev/aihub/blob/main/.github/workflows/publish-maven-central.yml)：`mvn -Pcentral clean deploy`，`autoPublish` 等到 Central `PUBLISHED`。
 
-记录 Central deployment id。若 Central 返回 `validated` 但要求手动发布，在 Sonatype Central Portal 或 Publisher API 中发布该 deployment。
+本地：
+
+```bash
+mvn -Pcentral -DskipTests clean deploy
+```
 
 ## 发布后验证
 

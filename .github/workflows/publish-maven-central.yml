@@ -1,0 +1,100 @@
+# 发布到 Maven Central（Sonatype Central Portal）
+#
+# 触发：
+#   - push 分支：release-1.0.0 / release-v1.0.0
+#   - 手动 workflow_dispatch
+#
+# 仓库 Secrets（Settings → Secrets and variables → Actions）：
+#   MAVEN_CENTRAL_USERNAME  — Central Portal User Token 用户名
+#   MAVEN_CENTRAL_PASSWORD  — Central Portal User Token 密码
+#   MAVEN_GPG_PRIVATE_KEY   — ASCII armored GPG 私钥
+#   MAVEN_GPG_PASSPHRASE    — GPG 私钥口令
+#
+# 发布坐标：io.github.whaleal-dev:aihub / aihub-spring-boot-starter / aihub-bom
+name: Publish Maven Central
+
+on:
+  push:
+    branches:
+      - 'release-*'
+  workflow_dispatch:
+    inputs:
+      version:
+        description: '覆盖版本号（留空则从分支名解析，如 release-1.0.0）'
+        required: false
+        type: string
+      skip_tests:
+        description: '跳过测试（紧急热修时使用）'
+        required: false
+        type: boolean
+        default: false
+
+concurrency:
+  group: maven-central-${{ github.ref }}
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  publish:
+    name: Test & Deploy Maven Central
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Resolve version
+        id: ver
+        run: |
+          set -euo pipefail
+          INPUT_VERSION="${{ github.event.inputs.version }}"
+          if [ -n "${INPUT_VERSION}" ]; then
+            VERSION="${INPUT_VERSION#v}"
+          else
+            REF_NAME="${GITHUB_REF_NAME}"
+            VERSION="${REF_NAME#release-}"
+            VERSION="${VERSION#v}"
+          fi
+          if [ -z "${VERSION}" ] || [[ ! "${VERSION}" =~ ^[0-9]+\.[0-9]+\.[0-9]+([.-].+)?$ ]]; then
+            echo "::error::无法解析版本号。请使用分支 release-x.y.z，或手动传入 version。当前: ${VERSION:-empty}"
+            exit 1
+          fi
+          if [[ "${VERSION}" == *-SNAPSHOT ]]; then
+            echo "::error::Maven Central 正式发布不允许 SNAPSHOT: ${VERSION}"
+            exit 1
+          fi
+          echo "version=${VERSION}" >> "$GITHUB_OUTPUT"
+          echo "Publishing version: ${VERSION}"
+
+      - name: Set up JDK 8
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '8'
+          cache: maven
+          server-id: central
+          server-username: MAVEN_CENTRAL_USERNAME
+          server-password: MAVEN_CENTRAL_PASSWORD
+          gpg-private-key: ${{ secrets.MAVEN_GPG_PRIVATE_KEY }}
+          gpg-passphrase: MAVEN_GPG_PASSPHRASE
+
+      - name: Set project version
+        run: |
+          mvn -B -ntp versions:set \
+            -DnewVersion="${{ steps.ver.outputs.version }}" \
+            -DgenerateBackupPoms=false \
+            -DprocessAllModules=true
+
+      - name: Run tests
+        if: ${{ github.event_name != 'workflow_dispatch' || github.event.inputs.skip_tests != 'true' }}
+        run: mvn -B -ntp clean verify
+
+      - name: Deploy to Maven Central
+        run: mvn -B -ntp -DskipTests -Pcentral clean deploy
+        env:
+          MAVEN_CENTRAL_USERNAME: ${{ secrets.MAVEN_CENTRAL_USERNAME }}
+          MAVEN_CENTRAL_PASSWORD: ${{ secrets.MAVEN_CENTRAL_PASSWORD }}
+          MAVEN_GPG_PASSPHRASE: ${{ secrets.MAVEN_GPG_PASSPHRASE }}

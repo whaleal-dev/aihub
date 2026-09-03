@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>com.whaleal</groupId>
+        <groupId>io.github.whaleal-dev</groupId>
         <artifactId>aihub-sdk</artifactId>
         <version>1.0.0</version>
     </parent>
@@ -56,12 +56,12 @@
     <dependencyManagement>
         <dependencies>
             <dependency>
-                <groupId>com.whaleal</groupId>
+                <groupId>io.github.whaleal-dev</groupId>
                 <artifactId>aihub</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.whaleal</groupId>
+                <groupId>io.github.whaleal-dev</groupId>
                 <artifactId>aihub-spring-boot-starter</artifactId>
                 <version>${project.version}</version>
             </dependency>
@@ -70,7 +70,7 @@
 
     <profiles>
         <profile>
-            <id>release</id>
+            <id>central</id>
             <build>
                 <plugins>
                     <plugin>
@@ -100,11 +100,7 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-gpg-plugin</artifactId>
-                        <version>1.6</version>
-                        <configuration>
-                            <executable>${gpg.executable}</executable>
-                            
-                        </configuration>
+                        <version>3.2.7</version>
                         <executions>
                             <execution>
                                 <id>sign-artifacts</id>
@@ -114,14 +110,22 @@
                                 </goals>
                             </execution>
                         </executions>
+                        <configuration>
+                            <gpgArguments>
+                                <arg>--pinentry-mode</arg>
+                                <arg>loopback</arg>
+                            </gpgArguments>
+                        </configuration>
                     </plugin>
                     <plugin>
                         <groupId>org.sonatype.central</groupId>
                         <artifactId>central-publishing-maven-plugin</artifactId>
-                        <version>0.11.0</version>
+                        <version>0.9.0</version>
                         <extensions>true</extensions>
                         <configuration>
                             <publishingServerId>central</publishingServerId>
+                            <autoPublish>true</autoPublish>
+                            <waitUntil>published</waitUntil>
                         </configuration>
                     </plugin>
                 </plugins>

@@ -132,7 +132,7 @@ ServiceLoaderUtil.load(ConnectionPoolProvider.class) // 连接池策略
 接口定义在 `com.whaleal.aihub.network`：
 
 ```java
-// aihub 1.0.0, groupId com.whaleal
+// aihub 1.0.0, groupId io.github.whaleal-dev
 public interface DispatcherProvider {
     okhttp3.Dispatcher getDispatcher();
 }

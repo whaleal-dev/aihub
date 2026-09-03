@@ -29,7 +29,7 @@ tags: [how-to]
 
 ```xml
 <dependency>
-  <groupId>com.whaleal</groupId>
+  <groupId>io.github.whaleal-dev</groupId>
   <artifactId>aihub</artifactId>
   <version>1.0.0</version>
 </dependency>
@@ -188,4 +188,4 @@ openAiConfig.setApiHost("https://codex.trovebox.online/");
 - 想让模型调用本地函数：看 [第一次工具调用](/docs/getting-started/first-tool-call)
 - 想继续看完整能力：看 [功能地图](/docs/getting-started/feature-map)
 
-→ API Javadoc：[`AiService`](https://javadoc.io/doc/com.whaleal/aihub/1.0.0/com/whaleal/aihub/service/factory/AiService.html) · [`IChatService`](https://javadoc.io/doc/com.whaleal/aihub/1.0.0/com/whaleal/aihub/service/IChatService.html)
+→ API Javadoc：[`AiService`](https://javadoc.io/doc/io.github.whaleal-dev/aihub/1.0.0/com/whaleal/aihub/service/factory/AiService.html) · [`IChatService`](https://javadoc.io/doc/io.github.whaleal-dev/aihub/1.0.0/com/whaleal/aihub/service/IChatService.html)

@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.whaleal</groupId>
+    <groupId>io.github.whaleal-dev</groupId>
     <artifactId>aihub</artifactId>
     <packaging>jar</packaging>
     <version>1.0.0</version>
@@ -363,10 +363,9 @@
         </profile>
 
         <profile>
-            <id>release</id>
+            <id>central</id>
             <build>
                 <plugins>
-                    <!-- source源码插件 -->
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-source-plugin</artifactId>
@@ -380,12 +379,10 @@
                             </execution>
                         </executions>
                     </plugin>
-
-                    <!-- Javadoc插件 -->
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-javadoc-plugin</artifactId>
-                        <version>3.6.3</version>
+                        <version>3.11.2</version>
                         <executions>
                             <execution>
                                 <id>attach-javadocs</id>
@@ -395,6 +392,7 @@
                                 <configuration>
                                     <doclint>none</doclint>
                                     <failOnError>false</failOnError>
+                                    <quiet>true</quiet>
                                     <tags>
                                         <tag>
                                             <name>Author</name>
@@ -414,19 +412,12 @@
                                     </tags>
                                 </configuration>
                             </execution>
-
                         </executions>
                     </plugin>
-
-                    <!-- GPG插件 -->
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-gpg-plugin</artifactId>
-                        <version>1.6</version>
-                        <configuration>
-                            <executable>${gpg.executable}</executable>
-                            
-                        </configuration>
+                        <version>3.2.7</version>
                         <executions>
                             <execution>
                                 <id>sign-artifacts</id>
@@ -436,16 +427,22 @@
                                 </goals>
                             </execution>
                         </executions>
+                        <configuration>
+                            <gpgArguments>
+                                <arg>--pinentry-mode</arg>
+                                <arg>loopback</arg>
+                            </gpgArguments>
+                        </configuration>
                     </plugin>
-
-                    <!--   central发布插件    -->
                     <plugin>
                         <groupId>org.sonatype.central</groupId>
                         <artifactId>central-publishing-maven-plugin</artifactId>
-                        <version>0.11.0</version>
+                        <version>0.9.0</version>
                         <extensions>true</extensions>
                         <configuration>
                             <publishingServerId>central</publishingServerId>
+                            <autoPublish>true</autoPublish>
+                            <waitUntil>published</waitUntil>
                         </configuration>
                     </plugin>
                 </plugins>

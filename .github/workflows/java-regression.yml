@@ -3,9 +3,9 @@ name: java-regression
 on:
   workflow_dispatch:
   push:
-    branches: [dev, main]
+    branches: [dev, main, 'release-*']
   pull_request:
-    branches: [dev, main]
+    branches: [dev, main, 'release-*']
 
 permissions:
   contents: read

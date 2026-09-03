@@ -29,7 +29,7 @@ tags: [reference]
 
 ## 4. 要不要同时引很多模块
 
-日常只引 `com.whaleal:aihub`。Spring 再加 `aihub-spring-boot-starter`。多模块时用 `aihub-bom` 对齐版本。
+日常只引 `io.github.whaleal-dev:aihub`。Spring 再加 `aihub-spring-boot-starter`。多模块时用 `aihub-bom` 对齐版本。
 
 ## 5. 文档和源码不一致怎么办
 

@@ -1,5 +1,5 @@
 <p align="center"><img src="https://capsule-render.vercel.app/api?type=waving&color=0:6A5ACD,100:2E86C1&height=180&section=header&text=aihub&fontSize=46&fontColor=ffffff&animation=fadeIn&desc=Java%20LLM%20client%20for%20JDK%208%2B&descAlignY=68" alt="aihub banner" /></p>
-<p align="center"><a href="https://search.maven.org/artifact/com.whaleal/aihub"><img src="https://img.shields.io/maven-central/v/com.whaleal/aihub?color=2E86C1&label=Maven%20Central" alt="Maven Central" /></a> <a href="https://whaleal-dev.github.io/aihub/"><img src="https://img.shields.io/badge/Docs-GitHub%20Pages-0A7EA4" alt="Docs" /></a> <a href="https://www.apache.org/licenses/LICENSE-2.0.txt"><img src="https://img.shields.io/badge/License-Apache%202.0-1F6FEB" alt="License" /></a> <img src="https://img.shields.io/badge/JDK-8%2B-2EA043" alt="JDK 8+" /> <a href="https://www.orcarouter.ai/ref/ref_76f80b88a83930469424"><img src="https://img.shields.io/badge/Powered_by-OrcaRouter-2563eb" alt="Powered by OrcaRouter" /></a></p>
+<p align="center"><a href="https://search.maven.org/artifact/io.github.whaleal-dev/aihub"><img src="https://img.shields.io/maven-central/v/io.github.whaleal-dev/aihub?color=2E86C1&label=Maven%20Central" alt="Maven Central" /></a> <a href="https://whaleal-dev.github.io/aihub/"><img src="https://img.shields.io/badge/Docs-GitHub%20Pages-0A7EA4" alt="Docs" /></a> <a href="https://www.apache.org/licenses/LICENSE-2.0.txt"><img src="https://img.shields.io/badge/License-Apache%202.0-1F6FEB" alt="License" /></a> <img src="https://img.shields.io/badge/JDK-8%2B-2EA043" alt="JDK 8+" /> <a href="https://www.orcarouter.ai/ref/ref_76f80b88a83930469424"><img src="https://img.shields.io/badge/Powered_by-OrcaRouter-2563eb" alt="Powered by OrcaRouter" /></a></p>
 
 # aihub
 
@@ -8,7 +8,7 @@
 它只做一件事：把各厂商的 HTTP / SSE API 收成同一套 Java 调用。
 
 - 版本：`1.0.0`
-- 坐标：`com.whaleal:aihub`
+- 坐标：`io.github.whaleal-dev:aihub`
 - GitHub：[whaleal-dev/aihub](https://github.com/whaleal-dev/aihub)
 - 维护者：恒哥
 
@@ -43,10 +43,12 @@
 
 ## 安装
 
-- Gradle：`implementation 'com.whaleal:aihub:1.0.0'`
-- Maven：`<dependency><groupId>com.whaleal</groupId><artifactId>aihub</artifactId><version>1.0.0</version></dependency>`
+- Gradle：`implementation 'io.github.whaleal-dev:aihub:1.0.0'`
+- Maven：`<dependency><groupId>io.github.whaleal-dev</groupId><artifactId>aihub</artifactId><version>1.0.0</version></dependency>`
 
-Spring Boot 使用 `com.whaleal:aihub-spring-boot-starter`。
+Spring Boot 使用 `io.github.whaleal-dev:aihub-spring-boot-starter`。
+
+推送分支 `release-x.y.z` 会按 quick-sms 同样方式发布到 Maven Central（`mvn -Pcentral deploy`）。
 
 ## 30 秒跑通
 

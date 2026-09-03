@@ -29,7 +29,7 @@ tags: [how-to]
 
 ```xml
 <dependency>
-  <groupId>com.whaleal</groupId>
+  <groupId>io.github.whaleal-dev</groupId>
   <artifactId>aihub-spring-boot-starter</artifactId>
   <version>1.0.0</version>
 </dependency>

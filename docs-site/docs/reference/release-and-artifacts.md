@@ -13,7 +13,7 @@ tags: [reference]
 AIHub 当前发布坐标使用：
 
 ```xml
-<groupId>com.whaleal</groupId>
+<groupId>io.github.whaleal-dev</groupId>
 ```
 
 当前仓库版本为：
@@ -28,7 +28,7 @@ AIHub 当前发布坐标使用：
 
 ```xml
 <dependency>
-    <groupId>com.whaleal</groupId>
+    <groupId>io.github.whaleal-dev</groupId>
     <artifactId>aihub</artifactId>
     <version>1.0.0</version>
 </dependency>
@@ -40,7 +40,7 @@ AIHub 当前发布坐标使用：
 <dependencyManagement>
     <dependencies>
         <dependency>
-            <groupId>com.whaleal</groupId>
+            <groupId>io.github.whaleal-dev</groupId>
             <artifactId>aihub-bom</artifactId>
             <version>1.0.0</version>
             <type>pom</type>
@@ -54,7 +54,7 @@ AIHub 当前发布坐标使用：
 
 ```xml
 <dependency>
-    <groupId>com.whaleal</groupId>
+    <groupId>io.github.whaleal-dev</groupId>
     <artifactId>aihub-spring-boot-starter</artifactId>
 </dependency>
 ```
@@ -73,12 +73,13 @@ AIHub 当前发布坐标使用：
 
 父 POM 是多模块发布入口，但根 artifact 默认不应被业务项目当成 SDK 使用。项目接入时只引入需要的模块。
 
-发布 profile 会处理 source、javadoc、GPG 签名和 Sonatype Central 发布配置。完整发布步骤见 [发布检查清单](/docs/reference/maintainers/release-checklist)。维护者发布前应确认：
+发布 profile `central` 会处理 source、javadoc、GPG 签名和 Sonatype Central 发布。完整步骤见 [发布检查清单](/docs/reference/maintainers/release-checklist)。维护者发布前应确认：
 
 - 版本号已在根 POM 和模块 POM 中一致更新。
 - `aihub-bom` 已包含需要对齐的发布模块。
 - live provider 测试和本地测试边界清楚。
-- release profile 使用的凭证不写入仓库。
+- `central` profile 使用的凭证放在 GitHub Secrets / 本机 `settings.xml`，不写入仓库。
+- 推送 `release-x.y.z` 触发自动发布。
 
 ## 依赖选择示例
 
@@ -86,7 +87,7 @@ AIHub 当前发布坐标使用：
 
 ```xml
 <dependency>
-    <groupId>com.whaleal</groupId>
+    <groupId>io.github.whaleal-dev</groupId>
     <artifactId>aihub</artifactId>
     <version>1.0.0</version>
 </dependency>
@@ -96,7 +97,7 @@ AIHub 当前发布坐标使用：
 
 ```xml
 <dependency>
-    <groupId>com.whaleal</groupId>
+    <groupId>io.github.whaleal-dev</groupId>
     <artifactId>aihub-spring-boot-starter</artifactId>
     <version>1.0.0</version>
 </dependency>

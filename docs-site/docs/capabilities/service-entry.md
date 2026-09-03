@@ -165,4 +165,4 @@ IChatService chatService = aiServiceRegistry.getChatService("trovebox-low-cost")
 
 ## 11. API Javadoc
 
-→ [`AiService`](https://javadoc.io/doc/com.whaleal/aihub/1.0.0/com/whaleal/aihub/service/factory/AiService.html) · [`AiServiceRegistry`](https://javadoc.io/doc/com.whaleal/aihub/1.0.0/com/whaleal/aihub/service/factory/AiServiceRegistry.html)
+→ [`AiService`](https://javadoc.io/doc/io.github.whaleal-dev/aihub/1.0.0/com/whaleal/aihub/service/factory/AiService.html) · [`AiServiceRegistry`](https://javadoc.io/doc/io.github.whaleal-dev/aihub/1.0.0/com/whaleal/aihub/service/factory/AiServiceRegistry.html)

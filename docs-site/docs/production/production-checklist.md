@@ -6,7 +6,7 @@ tags: [how-to]
 
 # 上线前检查
 
-- [ ] 依赖是 `com.whaleal:aihub`（或 starter），版本与 [Maven Central](https://search.maven.org/artifact/com.whaleal/aihub) 一致
+- [ ] 依赖是 `io.github.whaleal-dev:aihub`（或 starter），版本与 [Maven Central](https://search.maven.org/artifact/io.github.whaleal-dev/aihub) 一致
 - [ ] API Key 来自环境变量或密钥管理，未进 git
 - [ ] `PlatformType` 与 Config / 模型名匹配
 - [ ] 超时、代理、baseUrl 按环境区分

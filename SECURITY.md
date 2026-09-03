@@ -40,7 +40,7 @@ Include the following:
 In scope:
 
 - Vulnerabilities in aihub source that allow credential leakage, request forgery, or denial of service when the library is used as documented.
-- Supply-chain concerns in published artifacts under `com.whaleal` on Maven Central.
+- Supply-chain concerns in published artifacts under `io.github.whaleal-dev` on Maven Central.
 
 Out of scope:
 
