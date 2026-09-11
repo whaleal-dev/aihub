@@ -3,7 +3,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>io.github.whaleal-dev</groupId>
+    <groupId>com.whaleal</groupId>
     <artifactId>aihub-spring-boot-starter</artifactId>
     <packaging>jar</packaging>
     <version>1.0.0</version>
@@ -25,7 +25,7 @@
     <url>https://github.com/whaleal-dev/aihub</url>
 
     <organization>
-        <name>whaleal-dev</name>
+        <name>com.whaleal</name>
         <url>https://whaleal.com</url>
     </organization>
 
@@ -63,7 +63,7 @@
 
     <dependencies>
         <dependency>
-            <groupId>io.github.whaleal-dev</groupId>
+            <groupId>com.whaleal</groupId>
             <artifactId>aihub</artifactId>
             <version>${project.version}</version>
             <exclusions>

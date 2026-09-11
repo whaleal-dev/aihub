@@ -13,7 +13,7 @@ tags: [reference]
 AIHub 当前发布坐标使用：
 
 ```xml
-<groupId>io.github.whaleal-dev</groupId>
+<groupId>com.whaleal</groupId>
 ```
 
 当前仓库版本为：
@@ -28,7 +28,7 @@ AIHub 当前发布坐标使用：
 
 ```xml
 <dependency>
-    <groupId>io.github.whaleal-dev</groupId>
+    <groupId>com.whaleal</groupId>
     <artifactId>aihub</artifactId>
     <version>1.0.0</version>
 </dependency>
@@ -40,7 +40,7 @@ AIHub 当前发布坐标使用：
 <dependencyManagement>
     <dependencies>
         <dependency>
-            <groupId>io.github.whaleal-dev</groupId>
+            <groupId>com.whaleal</groupId>
             <artifactId>aihub-bom</artifactId>
             <version>1.0.0</version>
             <type>pom</type>
@@ -54,7 +54,7 @@ AIHub 当前发布坐标使用：
 
 ```xml
 <dependency>
-    <groupId>io.github.whaleal-dev</groupId>
+    <groupId>com.whaleal</groupId>
     <artifactId>aihub-spring-boot-starter</artifactId>
 </dependency>
 ```
@@ -87,7 +87,7 @@ AIHub 当前发布坐标使用：
 
 ```xml
 <dependency>
-    <groupId>io.github.whaleal-dev</groupId>
+    <groupId>com.whaleal</groupId>
     <artifactId>aihub</artifactId>
     <version>1.0.0</version>
 </dependency>
@@ -97,7 +97,7 @@ AIHub 当前发布坐标使用：
 
 ```xml
 <dependency>
-    <groupId>io.github.whaleal-dev</groupId>
+    <groupId>com.whaleal</groupId>
     <artifactId>aihub-spring-boot-starter</artifactId>
     <version>1.0.0</version>
 </dependency>

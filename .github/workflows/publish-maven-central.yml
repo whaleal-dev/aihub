@@ -10,7 +10,7 @@
 #   MAVEN_GPG_PRIVATE_KEY   — ASCII armored GPG 私钥
 #   MAVEN_GPG_PASSPHRASE    — GPG 私钥口令
 #
-# 发布坐标：io.github.whaleal-dev:aihub / aihub-spring-boot-starter / aihub-bom
+# 发布坐标：com.whaleal:aihub / aihub-spring-boot-starter / aihub-bom
 name: Publish Maven Central
 
 on:

@@ -7,6 +7,11 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 Release notes are also published on the [GitHub Releases](https://github.com/whaleal-dev/aihub/releases) page.
 Public docs: [GitHub Pages](https://whaleal-dev.github.io/aihub/).
 
+## Unreleased
+
+### Changed
+- Maven `groupId`：`io.github.whaleal-dev` → `com.whaleal`（Java 包名仍为 `com.whaleal.aihub`）。
+
 ## [1.0.0] — 2026-08-31
 
 First release of **whaleal aihub** as a JDK 8+ Java LLM client.

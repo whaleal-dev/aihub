@@ -9,7 +9,7 @@ tags: [reference]
 
 ### aihub
 
-JDK 8+ Java 大模型客户端，Maven 坐标 `io.github.whaleal-dev:aihub`。
+JDK 8+ Java 大模型客户端，Maven 坐标 `com.whaleal:aihub`。
 
 ### AiService
 
