@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>io.github.whaleal-dev</groupId>
+        <groupId>com.whaleal</groupId>
         <artifactId>aihub-sdk</artifactId>
         <version>1.0.0</version>
     </parent>
@@ -30,7 +30,7 @@
     <url>https://github.com/whaleal-dev/aihub</url>
 
     <organization>
-        <name>whaleal-dev</name>
+        <name>com.whaleal</name>
         <url>https://whaleal.com</url>
     </organization>
 
@@ -56,12 +56,12 @@
     <dependencyManagement>
         <dependencies>
             <dependency>
-                <groupId>io.github.whaleal-dev</groupId>
+                <groupId>com.whaleal</groupId>
                 <artifactId>aihub</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>io.github.whaleal-dev</groupId>
+                <groupId>com.whaleal</groupId>
                 <artifactId>aihub-spring-boot-starter</artifactId>
                 <version>${project.version}</version>
             </dependency>
