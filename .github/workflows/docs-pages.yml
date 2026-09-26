@@ -46,7 +46,7 @@ jobs:
       - name: Build docs
         env:
           GITHUB_PAGES: 'true'
-          DOCS_SITE_URL: https://whaleal.com
+          DOCS_SITE_URL: https://docs.whaleal.com
           DOCS_SITE_BASE_URL: /aihub/
         run: npm run build
 

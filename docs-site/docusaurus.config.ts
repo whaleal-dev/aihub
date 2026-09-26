@@ -3,8 +3,8 @@ import type {Config} from '@docusaurus/types';
 import type * as Preset from '@docusaurus/preset-classic';
 import generatedRedirects from './redirects.generated.json';
 
-/** GitHub Pages 默认地址：https://whaleal-dev.github.io/aihub/ */
-const siteUrl = process.env.DOCS_SITE_URL ?? 'https://whaleal-dev.github.io';
+/** 公开文档站：https://docs.whaleal.com/aihub/ */
+const siteUrl = process.env.DOCS_SITE_URL ?? 'https://docs.whaleal.com';
 const siteBaseUrl = process.env.DOCS_SITE_BASE_URL ?? '/aihub/';
 
 const config: Config = {
